@@ -19,19 +19,21 @@
         app:menu="@menu/mymenu" />
 
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/activity_database"
-    android:layout_width="match_parent"
+    <LinearLayout
+
+        android:id="@+id/activity_database"
+        android:layout_width="match_parent"
 
 
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_marginTop="48dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ListView
+            android:id="@+id/listView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/listView"></ListView>
+            android:layout_height="match_parent"></ListView>
 
 
     </LinearLayout>

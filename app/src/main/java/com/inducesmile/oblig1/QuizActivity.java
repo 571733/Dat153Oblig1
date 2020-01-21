@@ -2,6 +2,7 @@ package com.inducesmile.oblig1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -14,20 +15,21 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item ) {
         switch (item.getItemId()) {
             case R.id.quiz:
-                // User chose the "Settings" item, show the app settings UI...
+                Intent intentQuiz = new Intent(QuizActivity.this, QuizActivity.class);
+                startActivity(intentQuiz);
                 return true;
 
             case R.id.add:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
+                Intent intentAdd = new Intent(QuizActivity.this, AddActivity.class);
+                startActivity(intentAdd);
                 return true;
 
             case R.id.database:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
+                Intent intentDatabase = new Intent(QuizActivity.this, DatabaseActivity.class);
+                startActivity(intentDatabase);
                 return true;
 
             default:
