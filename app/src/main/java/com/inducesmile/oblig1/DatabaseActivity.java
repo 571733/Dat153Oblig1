@@ -17,8 +17,8 @@ import android.widget.TextView;
 
 public class DatabaseActivity extends AppCompatActivity {
 
-    int[] IMAGES = {R.drawable.bart, R.drawable.homer};
-    String[] NAMES = {"Bart Simpson", "Homer Simpson"};
+    Integer[] IMAGES = {R.drawable.bart, R.drawable.homer, R.drawable.marge, R.drawable.kenny, R.drawable.kyle, R.drawable.cartman};
+    String[] NAMES = {"Bart Simpson", "Homer Simpson", "Marge Simpsons", "Kenny", "Kyle", "Cartman"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,4 +85,6 @@ public class DatabaseActivity extends AppCompatActivity {
 
         }
     }
+
+
 }
