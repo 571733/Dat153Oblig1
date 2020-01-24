@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,19 +16,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public class QuizActivity extends AppCompatActivity {
 int poeng = 0;
+    int antallQuizSpm = 0;
+    TextView galtSvar;
+    Button svarButtonOn;
+    EditText svarEditText;
+
+ArrayList<ImageObjects> quizDatabase;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        quizDatabase = ObjectsArray.addStandardPic();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
-        //createCheckTable();
+        galtSvar = (TextView) findViewById(R.id.galtSvar_textView);
+        svarButtonOn = (Button) findViewById(R.id.svar_button);
+        svarEditText = (EditText) findViewById(R.id.svar_editText);
+
 
     }
 
@@ -58,21 +65,23 @@ int poeng = 0;
 
         }
     }
-    DatabaseActivity databaseActivity = new DatabaseActivity();
-    List<Integer> kopi = new ArrayList<>(Arrays.asList(databaseActivity.IMAGES));
-    List<String> kopiNames = new ArrayList<>(Arrays.asList(databaseActivity.NAMES));
+    //DatabaseActivity databaseActivity = new DatabaseActivity();
+    //List<Integer> kopi = new ArrayList<>(Arrays.asList(databaseActivity.IMAGES));
+    //List<String> kopiNames = new ArrayList<>(Arrays.asList(databaseActivity.NAMES));
 
-    DatabaseActivity databaseNames = new DatabaseActivity();
+    //DatabaseActivity databaseNames = new DatabaseActivity();
 
 
 
     int antKlikk = 0;
-    int globalIndex = -1;
-    int antallQuizSpm = kopi.size();
+    int globalIndex = 0;
+
 
     public void quizpic (View view){
-
+        svarEditText.setEnabled(true);
+       antallQuizSpm = quizDatabase.size();
         antKlikk++;
+        galtSvar.setText("");
       //  Log.i("Ant bilder ", ""+antallQuizSpm);
         Log.i("Ant klikk ", ""+antKlikk);
         Button quizButton = (Button) findViewById(R.id.quiz_button);
@@ -80,6 +89,10 @@ int poeng = 0;
 
         if (!quizButton.getText().equals("Neste")) {
             quizButton.setText("Neste");
+            svarButtonOn.setVisibility(View.VISIBLE);
+            svarEditText.setVisibility(View.VISIBLE);
+
+
         }
         if (antKlikk == antallQuizSpm){
           //  Toast.makeText(this, "Du har nå fullført quizen", Toast.LENGTH_LONG).show();
@@ -89,26 +102,26 @@ int poeng = 0;
 
 
        loadbilde();
-        Button svarButtonOn = (Button) findViewById(R.id.svar_button);
+
        svarButtonOn.setEnabled(true);
 
        EditText EmptyEditText = (EditText) findViewById(R.id.svar_editText);
        EmptyEditText.setText("");
         Log.i("quizIndex ", ""+globalIndex);
-
+        svarEditText.setHint("Hvem er på bildet?");
 
 
     }
 
     public void loadbilde(){
         ImageView imgView = (ImageView) findViewById(R.id.imageView_quiz);
-        int index = new Random().nextInt(kopi.size());
+        int index = new Random().nextInt(quizDatabase.size());
         globalIndex = index;
-        imgView.setImageResource(kopi.get(index));
+        imgView.setImageResource(quizDatabase.get(index).getImage());
 
 
 
-        kopi.remove(index);
+        //quizDatabase.remove(index);
         //kopiNames.remove(index);
 
 
@@ -117,32 +130,38 @@ int poeng = 0;
         hideKeyboard(this);
         Button svarButtonOff = (Button) findViewById(R.id.svar_button);
         svarButtonOff.setEnabled(false);
-
+        Log.i("Antall klikker: ",""+antKlikk);
+        Log.i("Antall QuizSpmer: ",""+antallQuizSpm);
         Button turnOnQuizButton = (Button) findViewById(R.id.quiz_button);
-        if (!(antKlikk == antallQuizSpm)) {
+        if (antallQuizSpm > 1) {
             turnOnQuizButton.setEnabled(true);
         }else{
             Toast.makeText(this, "Du har nå fullført quizen", Toast.LENGTH_LONG).show();
         }
 
         Log.i("svarIndex ", ""+globalIndex);
-        EditText svar = (EditText) findViewById(R.id.svar_editText);
-        String dbName = kopiNames.get(globalIndex);
+
+        String dbName = quizDatabase.get(globalIndex).getName();
 
         Log.i("dataBaseName ",""+dbName);
-        Log.i("input", ""+svar.getText().toString());
+        Log.i("input", ""+ svarEditText.getText().toString());
 
 
-        if (dbName.equals(svar.getText().toString())){
+        if (dbName.equals(svarEditText.getText().toString())){
             poeng++;
 
             Log.i("Funket", "ja");
+        }else {
+
+            galtSvar.setText("Feil svar! Riktig svar er "+dbName);
         }
         TextView score = (TextView) findViewById(R.id.score_textView);
         score.setText("Din score "+Integer.toString(poeng)+" / "+Integer.toString(antKlikk));
 
-        kopiNames.remove(globalIndex);
+        quizDatabase.remove(globalIndex);
         turnOnQuizButton.setFocusable(true);
+        svarEditText.setEnabled(false);
+        svarEditText.setHint("");
     }
 
     public static void hideKeyboard(Activity activity) {

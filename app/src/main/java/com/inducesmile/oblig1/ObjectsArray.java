@@ -17,9 +17,9 @@ public static ArrayList<ImageObjects> addStandardPic(){
     arrayList.add(i1);
     arrayList.add(i2);
     arrayList.add(i3);
-    //arrayList.add(i4);
-    //arrayList.add(i5);
-    //arrayList.add(i6);
+    arrayList.add(i4);
+    arrayList.add(i5);
+    arrayList.add(i6);
 
     return arrayList;
 }

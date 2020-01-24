@@ -26,8 +26,8 @@ public class DatabaseActivity extends AppCompatActivity {
 
 
 
-    Integer[] IMAGES = {R.drawable.bart, R.drawable.homer, R.drawable.marge, R.drawable.kenny, R.drawable.kyle, R.drawable.cartman};
-    String[] NAMES = {"Bart Simpson", "Homer Simpson", "Marge Simpsons", "Kenny", "Kyle", "Cartman"};
+   // Integer[] IMAGES = {R.drawable.bart, R.drawable.homer, R.drawable.marge, R.drawable.kenny, R.drawable.kyle, R.drawable.cartman};
+   // String[] NAMES = {"Bart Simpson", "Homer Simpson", "Marge Simpsons", "Kenny", "Kyle", "Cartman"};
 
 
 
