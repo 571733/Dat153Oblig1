@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,28 +16,40 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class DatabaseActivity extends AppCompatActivity {
+
+    ArrayList<ImageObjects> standardObjects;
+
+
+
+
 
     Integer[] IMAGES = {R.drawable.bart, R.drawable.homer, R.drawable.marge, R.drawable.kenny, R.drawable.kyle, R.drawable.cartman};
     String[] NAMES = {"Bart Simpson", "Homer Simpson", "Marge Simpsons", "Kenny", "Kyle", "Cartman"};
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
-
+        standardObjects = ObjectsArray.addStandardPic();
         ListView listView = (ListView) findViewById(R.id.listView);
 
         CustomAdapter customAdapter = new CustomAdapter();
 
         listView.setAdapter(customAdapter);
+        Log.i("DENNYE", ""+standardObjects.size());
     }
 
     class CustomAdapter extends BaseAdapter{
 
         @Override
         public int getCount() {
-            return IMAGES.length;
+
+            return standardObjects.size();
         }
 
         @Override
@@ -54,8 +67,8 @@ public class DatabaseActivity extends AppCompatActivity {
             view = getLayoutInflater().inflate(R.layout.custom_layout, null);
             ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
             TextView textView_name = (TextView) view.findViewById(R.id.textView_name);
-            imageView.setImageResource(IMAGES[position]);
-            textView_name.setText(NAMES[position]);
+            imageView.setImageResource(standardObjects.get(position).getImage());
+            textView_name.setText(standardObjects.get(position).getName());
             return view;
         }
     }

@@ -33,6 +33,7 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 takePicture();
+                //galleryAddPic();
             }
         });
     }
