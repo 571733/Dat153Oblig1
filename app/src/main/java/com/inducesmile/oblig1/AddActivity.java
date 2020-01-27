@@ -14,15 +14,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class AddActivity extends AppCompatActivity {
     ImageView cameraImage;
-
+    ArrayList<ImageObjects> addDatabase = MainActivity.quizData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,5 +164,6 @@ public class AddActivity extends AppCompatActivity {
         Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
         cameraImage.setImageBitmap(bitmap);
     }
+
 
 }

@@ -16,21 +16,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class QuizActivity extends AppCompatActivity {
+    /* TODO: Arrayen oppdaterer seg på ett vis... Om jeg går til quiz, så slettes indexer.. Trykker jeg så på database så er de borte der også. */
 int poeng = 0;
     int antallQuizSpm = 0;
     TextView galtSvar;
     Button svarButtonOn;
     EditText svarEditText;
 
-ArrayList<ImageObjects> quizDatabase;
+ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
 
+    //Laget en kopi. Kopien vil etterhvert tømmes. Fikk problemer med at andre aktiviteter sin liste også ble tømt da. Derfor en kopi
+    List<ImageObjects> quizDatabase = new ArrayList<>(quizDatabases);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        quizDatabase = ObjectsArray.addStandardPic();
+       //quizDatabasea = ObjectsArray.arrayList;
+       //quizDatabase = MainActivity.quizData;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
         galtSvar = (TextView) findViewById(R.id.galtSvar_textView);
@@ -137,6 +143,7 @@ ArrayList<ImageObjects> quizDatabase;
             turnOnQuizButton.setEnabled(true);
         }else{
             Toast.makeText(this, "Du har nå fullført quizen", Toast.LENGTH_LONG).show();
+            //quizDatabase = MainActivity.quizData; //Virker ikke
         }
 
         Log.i("svarIndex ", ""+globalIndex);

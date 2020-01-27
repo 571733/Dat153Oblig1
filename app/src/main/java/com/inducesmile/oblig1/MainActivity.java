@@ -9,10 +9,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 
 public class MainActivity extends AppCompatActivity {
+   public static  ArrayList<ImageObjects> quizData ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.menu_toolbar);
         //setSupportActionBar(myToolbar);
+        quizData = ObjectsArray.addStandardPic();
+        quizData.add(new ImageObjects(R.drawable.quiz_icon, "Icon"));
+
+
     }
 
     @Override

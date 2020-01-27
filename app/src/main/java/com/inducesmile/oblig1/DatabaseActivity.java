@@ -12,22 +12,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class DatabaseActivity extends AppCompatActivity {
 
-    ArrayList<ImageObjects> standardObjects;
-
-
-
-
-
-   // Integer[] IMAGES = {R.drawable.bart, R.drawable.homer, R.drawable.marge, R.drawable.kenny, R.drawable.kyle, R.drawable.cartman};
-   // String[] NAMES = {"Bart Simpson", "Homer Simpson", "Marge Simpsons", "Kenny", "Kyle", "Cartman"};
+   public static ArrayList<ImageObjects> standardObjects;
 
 
 
@@ -35,12 +30,15 @@ public class DatabaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
-        standardObjects = ObjectsArray.addStandardPic();
+        standardObjects = MainActivity.quizData;
         ListView listView = (ListView) findViewById(R.id.listView);
 
         CustomAdapter customAdapter = new CustomAdapter();
 
-        listView.setAdapter(customAdapter);
+
+
+            listView.setAdapter(customAdapter);
+
         Log.i("DENNYE", ""+standardObjects.size());
     }
 
@@ -63,12 +61,30 @@ public class DatabaseActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View view, ViewGroup viewGroup) {
+        public View getView(final int position, View view, ViewGroup viewGroup) {
+            View v = view;
             view = getLayoutInflater().inflate(R.layout.custom_layout, null);
             ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
             TextView textView_name = (TextView) view.findViewById(R.id.textView_name);
             imageView.setImageResource(standardObjects.get(position).getImage());
             textView_name.setText(standardObjects.get(position).getName());
+
+
+
+            //ImageButton removeFav = (ImageButton)v;
+            view.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(DatabaseActivity.this, "Du klikket", Toast.LENGTH_SHORT).show();
+                    standardObjects.remove(position);
+                    // After you delete the object from Parse database here,
+                    notifyDataSetChanged();
+
+                }
+            });
+
+
             return view;
         }
     }
@@ -86,11 +102,11 @@ public class DatabaseActivity extends AppCompatActivity {
                 startActivity(intentAdd);
                 return true;
 
-            case R.id.database:
+           /* case R.id.database:
                 Intent intentDatabase = new Intent(DatabaseActivity.this, DatabaseActivity.class);
                 startActivity(intentDatabase);
                 return true;
-
+*/
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
