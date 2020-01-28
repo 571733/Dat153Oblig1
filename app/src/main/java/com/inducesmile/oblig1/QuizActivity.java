@@ -154,7 +154,7 @@ ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
         Log.i("input", ""+ svarEditText.getText().toString());
 
 
-        if (dbName.equals(svarEditText.getText().toString())){
+        if (dbName.toUpperCase().equals(svarEditText.getText().toString().toUpperCase())){
             poeng++;
 
             Log.i("Funket", "ja");

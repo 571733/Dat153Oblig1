@@ -11,11 +11,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,8 +27,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class AddActivity extends AppCompatActivity {
-    ImageView cameraImage;
+    ImageView cameraImage = null;
     ArrayList<ImageObjects> addDatabase = MainActivity.quizData;
+    EditText savePicName = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,8 +86,23 @@ static final int RESULT_LOAD_RESULT = 2;
 
             cameraImage.setImageBitmap(imageBitmap);
 
+        }else if (requestCode == RESULT_LOAD_RESULT && resultCode == RESULT_OK && data != null) {
+                Uri selectedImage = data.getData();
+                Bitmap imageBitmap = null;
+                try {
+                    imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                cameraImage.setImageBitmap(imageBitmap);
+                //EditText editText = findViewById(R.id.name_edit);
+                //((name = editText.getText().toString();
+
+                //imageToUpload.setImageBitmap(bitmap);
+            }
+
         }
-    }
+
 
     private void takePicture() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -93,14 +112,27 @@ static final int RESULT_LOAD_RESULT = 2;
     }
 
     public void savePic (View view){
-        BitmapDrawable drawable = (BitmapDrawable) cameraImage.getDrawable();
-        Bitmap bitmap = drawable.getBitmap();
-        addDatabase.add(new ImageObjects(bitmap, "Hello"));
+        if (cameraImage != null ) {
+            BitmapDrawable drawable = (BitmapDrawable) cameraImage.getDrawable();
+            Bitmap bitmap = drawable.getBitmap();
+            savePicName = (EditText) findViewById(R.id.save_editText);
+            Log.i("Status", "" + savePicName.getText().toString());
+            if (!savePicName.getText().toString().equals("")){
+                addDatabase.add(new ImageObjects(bitmap, savePicName.getText().toString()));
+                Toast.makeText(this, "Bildet ble lagret", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(this, "Vennligst gi bildet ett navn", Toast.LENGTH_SHORT).show();
+            }
+
+        }else {
+            Toast.makeText(this, "Her manglet det noe. Bildet ble ikke lagret", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void loadExistingPhoto (View view){
             Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
             startActivityForResult(galleryIntent, RESULT_LOAD_RESULT);
+
         }
 
         /*@Override
