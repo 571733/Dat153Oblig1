@@ -109,11 +109,11 @@ public class DatabaseActivity extends AppCompatActivity {
                 startActivity(intentAdd);
                 return true;
 
-           /* case R.id.database:
-                Intent intentDatabase = new Intent(DatabaseActivity.this, DatabaseActivity.class);
+            case R.id.home:
+                Intent intentDatabase = new Intent(DatabaseActivity.this, MainActivity.class);
                 startActivity(intentDatabase);
                 return true;
-*/
+
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
