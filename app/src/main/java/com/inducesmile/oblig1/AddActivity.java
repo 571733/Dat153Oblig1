@@ -112,6 +112,7 @@ static final int RESULT_LOAD_RESULT = 2;
     }
 
     public void savePic (View view){
+        QuizActivity.hideKeyboard(this);
         if (cameraImage != null ) {
             BitmapDrawable drawable = (BitmapDrawable) cameraImage.getDrawable();
             Bitmap bitmap = drawable.getBitmap();
@@ -120,6 +121,7 @@ static final int RESULT_LOAD_RESULT = 2;
             if (!savePicName.getText().toString().equals("")){
                 addDatabase.add(new ImageObjects(bitmap, savePicName.getText().toString()));
                 Toast.makeText(this, "Bildet ble lagret", Toast.LENGTH_SHORT).show();
+                savePicName.setText("");
             }else{
                 Toast.makeText(this, "Vennligst gi bildet ett navn", Toast.LENGTH_SHORT).show();
             }
