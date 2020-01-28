@@ -44,12 +44,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="105dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="93dp"
+        android:layout_marginEnd="12dp"
         android:ems="10"
         android:hint="Hvem er på bildet?"
         android:inputType="textPersonName"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/correctAnswer_imageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quiz_button" />
 
@@ -87,5 +87,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/svar_editText" />
+
+    <ImageView
+        android:id="@+id/correctAnswer_imageView"
+        android:layout_width="46dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="306dp"
+        android:layout_marginEnd="35dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/svar_editText"
+        app:layout_constraintTop_toBottomOf="@+id/menu_toolbar"
+        app:srcCompat="@drawable/ic_done" />
+
+    <ImageView
+        android:id="@+id/wrongAnswer_imageView"
+        app:srcCompat="@drawable/ic_wrong"
+        android:layout_width="46dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="306dp"
+        android:layout_marginEnd="35dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/svar_editText"
+        app:layout_constraintTop_toBottomOf="@+id/menu_toolbar"
+         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

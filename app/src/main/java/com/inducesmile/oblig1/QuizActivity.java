@@ -27,6 +27,8 @@ int poeng = 0;
     TextView galtSvar;
     Button svarButtonOn;
     EditText svarEditText;
+    ImageView correctAnswerIcon;
+    ImageView wrongAnswerIcon;
 
 ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
 
@@ -42,6 +44,8 @@ ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
         galtSvar = (TextView) findViewById(R.id.galtSvar_textView);
         svarButtonOn = (Button) findViewById(R.id.svar_button);
         svarEditText = (EditText) findViewById(R.id.svar_editText);
+        correctAnswerIcon = (ImageView) findViewById(R.id.correctAnswer_imageView);
+        wrongAnswerIcon = (ImageView) findViewById(R.id.wrongAnswer_imageView);
 
 
     }
@@ -84,6 +88,8 @@ ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
 
 
     public void quizpic (View view){
+        correctAnswerIcon.setVisibility(View.INVISIBLE);
+        wrongAnswerIcon.setVisibility(View.INVISIBLE);
         svarEditText.setEnabled(true);
        antallQuizSpm = quizDatabase.size();
         antKlikk++;
@@ -156,10 +162,10 @@ ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
 
         if (dbName.toUpperCase().equals(svarEditText.getText().toString().toUpperCase())){
             poeng++;
-
+            correctAnswerIcon.setVisibility(View.VISIBLE);
             Log.i("Funket", "ja");
         }else {
-
+            wrongAnswerIcon.setVisibility(View.VISIBLE);
             galtSvar.setText("Feil svar! Riktig svar er "+dbName);
         }
         TextView score = (TextView) findViewById(R.id.score_textView);
