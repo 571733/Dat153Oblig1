@@ -66,7 +66,7 @@ public class DatabaseActivity extends AppCompatActivity {
             view = getLayoutInflater().inflate(R.layout.custom_layout, null);
             ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
             TextView textView_name = (TextView) view.findViewById(R.id.textView_name);
-            imageView.setImageResource(standardObjects.get(position).getImage());
+            imageView.setImageBitmap(standardObjects.get(position).getImage());
             textView_name.setText(standardObjects.get(position).getName());
 
 

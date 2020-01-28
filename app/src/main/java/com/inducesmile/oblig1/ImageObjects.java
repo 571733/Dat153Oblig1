@@ -1,19 +1,21 @@
 package com.inducesmile.oblig1;
 
+import android.graphics.Bitmap;
+
 public class ImageObjects {
-    private int image;
+    private Bitmap image;
     private String name;
 
-    public ImageObjects(int image, String name) {
+    public ImageObjects(Bitmap image, String name) {
         this.image = image;
         this.name = name;
     }
 
-    public int getImage() {
+    public Bitmap getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(Bitmap image) {
         this.image = image;
     }
 

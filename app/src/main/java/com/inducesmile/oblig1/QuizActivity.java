@@ -123,7 +123,7 @@ ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
         ImageView imgView = (ImageView) findViewById(R.id.imageView_quiz);
         int index = new Random().nextInt(quizDatabase.size());
         globalIndex = index;
-        imgView.setImageResource(quizDatabase.get(index).getImage());
+        imgView.setImageBitmap(quizDatabase.get(index).getImage());
 
 
 

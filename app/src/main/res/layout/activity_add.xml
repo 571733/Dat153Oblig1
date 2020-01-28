@@ -33,19 +33,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="71dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="38dp"
         android:text="Take Picture"
+        app:layout_constraintBottom_toTopOf="@+id/editText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/camera_imageView" />
 
     <Button
         android:id="@+id/button_Save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="31dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="savePic"
         android:text="Save"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/editText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_camera" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="Hvem er på bildet?"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_Save"
+        app:layout_constraintTop_toBottomOf="@+id/button_camera" />
+
+    <Button
+        android:id="@+id/existingPic_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="34dp"
+        android:onClick="loadExistingPhoto"
+        android:text="Eksisterende bilder"
+        app:layout_constraintBottom_toTopOf="@+id/button_Save"
+        app:layout_constraintEnd_toStartOf="@+id/button_camera"
+        app:layout_constraintTop_toBottomOf="@+id/camera_imageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

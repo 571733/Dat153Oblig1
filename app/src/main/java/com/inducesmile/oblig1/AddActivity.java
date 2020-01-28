@@ -6,6 +6,7 @@ import androidx.core.content.FileProvider;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -67,7 +68,7 @@ public class AddActivity extends AppCompatActivity {
     }
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
-
+static final int RESULT_LOAD_RESULT = 2;
 
 
     @Override
@@ -80,6 +81,7 @@ public class AddActivity extends AppCompatActivity {
             Bitmap imageBitmap = (Bitmap) extras.get("data");
 
             cameraImage.setImageBitmap(imageBitmap);
+
         }
     }
 
@@ -90,80 +92,43 @@ public class AddActivity extends AppCompatActivity {
         }
     }
 
-    String currentPhotoPath;
-
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-
-        // Save a file: path for use with ACTION_VIEW intents
-        currentPhotoPath = image.getAbsolutePath();
-        return image;
+    public void savePic (View view){
+        BitmapDrawable drawable = (BitmapDrawable) cameraImage.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+        addDatabase.add(new ImageObjects(bitmap, "Hello"));
     }
 
-    static final int REQUEST_TAKE_PHOTO = 1;
+    public void loadExistingPhoto (View view){
+            Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+            startActivityForResult(galleryIntent, RESULT_LOAD_RESULT);
+        }
 
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            // Create the File where the photo should go
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                // Error occurred while creating the File
+        /*@Override
+        protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
 
-            }
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.example.android.fileprovider",
-                        photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+            if (requestCode == RESULT_LOAD_RESULT && resultCode == RESULT_OK && data != null) {
+                Uri selectedImage = data.getData();
+                bitmap = null;
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ImageView imageToUpload = findViewById(R.id.imageView_add);
+                EditText editText = findViewById(R.id.name_edit);
+                name = editText.getText().toString();
+                Log.i("Name: ", ""+ name);
+                imageToUpload.setImageBitmap(bitmap);
             }
         }
+
+
     }
+ */
 
-    private void galleryAddPic() {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        File f = new File(currentPhotoPath);
-        Uri contentUri = Uri.fromFile(f);
-        mediaScanIntent.setData(contentUri);
-        this.sendBroadcast(mediaScanIntent);
-    }
 
-    private void setPic() {
-        // Get the dimensions of the View
-        int targetW = cameraImage.getWidth();
-        int targetH = cameraImage.getHeight();
 
-        // Get the dimensions of the bitmap
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        bmOptions.inJustDecodeBounds = true;
-
-        int photoW = bmOptions.outWidth;
-        int photoH = bmOptions.outHeight;
-
-        // Determine how much to scale down the image
-        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
-
-        // Decode the image file into a Bitmap sized to fill the View
-        bmOptions.inJustDecodeBounds = false;
-        bmOptions.inSampleSize = scaleFactor;
-        bmOptions.inPurgeable = true;
-
-        Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
-        cameraImage.setImageBitmap(bitmap);
-    }
 
 
 }
