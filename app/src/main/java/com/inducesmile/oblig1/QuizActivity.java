@@ -53,7 +53,12 @@ ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
     public boolean onOptionsItemSelected(MenuItem item ) {
         switch (item.getItemId()) {
             case R.id.home:
-                Intent intentQuiz = new Intent(QuizActivity.this, MainActivity.class);
+                Intent intentMain = new Intent(QuizActivity.this, MainActivity.class);
+                startActivity(intentMain);
+                return true;
+
+            case R.id.quiz:
+                Intent intentQuiz = new Intent(QuizActivity.this, QuizActivity.class);
                 startActivity(intentQuiz);
                 return true;
 
