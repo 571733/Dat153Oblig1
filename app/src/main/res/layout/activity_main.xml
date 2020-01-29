@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/backgroundPinkish"
     android:elevation="4dp"
     android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
@@ -20,5 +20,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/mymenu" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="289dp"
+        android:layout_height="405dp"
+        android:layout_marginTop="105dp"
+        android:ems="10"
+        android:fontFamily="serif-monospace"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:text="@string/app_description"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu_toolbar" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

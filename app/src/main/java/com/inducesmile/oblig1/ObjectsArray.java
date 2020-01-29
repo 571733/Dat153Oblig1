@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class ObjectsArray {
 
-    public static ArrayList<ImageObjects> arrayList = new ArrayList<>();
+   /* public static ArrayList<ImageObjects> arrayList = new ArrayList<>();
 
 
 
@@ -19,7 +19,7 @@ public class ObjectsArray {
     return arrayList;
 }
 
-
+*/
 
 
 }

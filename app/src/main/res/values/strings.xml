@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Oblig1</string>
+    <string name="app_description">Hei, og velkommen til quizappen. Velg "Quiz" i menyen for å bli quizet. Velg "Database" for å slette, eller se over
+    objekter som vil komme i quizen. Velg "Add" for å legge til bilder i databasen</string>
 </resources>

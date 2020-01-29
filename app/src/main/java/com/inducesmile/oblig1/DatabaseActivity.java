@@ -1,18 +1,13 @@
 package com.inducesmile.oblig1;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -22,10 +17,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class DatabaseActivity extends AppCompatActivity {
-
-   public static ArrayList<ImageObjects> standardObjects;
-
-
+    public static ArrayList<ImageObjects> standardObjects;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +25,8 @@ public class DatabaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_database);
         standardObjects = MainActivity.quizData;
         ListView listView = (ListView) findViewById(R.id.listView);
-
         CustomAdapter customAdapter = new CustomAdapter();
-
-
-
-            listView.setAdapter(customAdapter);
-
-        Log.i("DENNYE", ""+standardObjects.size());
+        listView.setAdapter(customAdapter);
     }
 
     class CustomAdapter extends BaseAdapter{
@@ -72,28 +58,18 @@ public class DatabaseActivity extends AppCompatActivity {
 
 
 
-            //ImageButton removeFav = (ImageButton)v;
-                ImageButton deleteButton = (ImageButton) view.findViewById(R.id.button_delete);
-
-
-
+            //Sletting av objekter fra "database
+            ImageButton deleteButton = (ImageButton) view.findViewById(R.id.button_delete);
             deleteButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(DatabaseActivity.this, "Du klikket", Toast.LENGTH_SHORT).show();
                     standardObjects.remove(position);
-                    // After you delete the object from Parse database here,
                     notifyDataSetChanged();
-
                 }
             });
-
-
             return view;
         }
-
-
     }
 
     @Override
@@ -121,8 +97,4 @@ public class DatabaseActivity extends AppCompatActivity {
 
         }
     }
-
-
-
-
 }

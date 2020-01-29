@@ -27,20 +27,21 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class AddActivity extends AppCompatActivity {
-    ImageView cameraImage = null;
-    ArrayList<ImageObjects> addDatabase = MainActivity.quizData;
-    EditText savePicName = null;
-
+    private ImageView cameraImage = null;
+    private ArrayList<ImageObjects> addDatabase = MainActivity.quizData;
+    private EditText savePicName = null;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int RESULT_LOAD_RESULT = 2;
+    private Button cam;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-        Button cam = (Button) findViewById(R.id.button_camera);
+        cam = (Button) findViewById(R.id.button_camera);
         cam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 takePicture();
-                //galleryAddPic();
             }
         });
     }
@@ -53,8 +54,8 @@ public class AddActivity extends AppCompatActivity {
                 startActivity(intentQuiz);
                 return true;
 
-            case R.id.add:
-                Intent intentAdd = new Intent(AddActivity.this, AddActivity.class);
+            case R.id.home:
+                Intent intentAdd = new Intent(AddActivity.this, MainActivity.class);
                 startActivity(intentAdd);
                 return true;
 
@@ -71,8 +72,6 @@ public class AddActivity extends AppCompatActivity {
         }
     }
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-static final int RESULT_LOAD_RESULT = 2;
 
 
     @Override
@@ -95,10 +94,6 @@ static final int RESULT_LOAD_RESULT = 2;
                     e.printStackTrace();
                 }
                 cameraImage.setImageBitmap(imageBitmap);
-                //EditText editText = findViewById(R.id.name_edit);
-                //((name = editText.getText().toString();
-
-                //imageToUpload.setImageBitmap(bitmap);
             }
 
         }
@@ -136,33 +131,4 @@ static final int RESULT_LOAD_RESULT = 2;
             startActivityForResult(galleryIntent, RESULT_LOAD_RESULT);
 
         }
-
-        /*@Override
-        protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-            super.onActivityResult(requestCode, resultCode, data);
-
-            if (requestCode == RESULT_LOAD_RESULT && resultCode == RESULT_OK && data != null) {
-                Uri selectedImage = data.getData();
-                bitmap = null;
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                ImageView imageToUpload = findViewById(R.id.imageView_add);
-                EditText editText = findViewById(R.id.name_edit);
-                name = editText.getText().toString();
-                Log.i("Name: ", ""+ name);
-                imageToUpload.setImageBitmap(bitmap);
-            }
-        }
-
-
-    }
- */
-
-
-
-
-
 }

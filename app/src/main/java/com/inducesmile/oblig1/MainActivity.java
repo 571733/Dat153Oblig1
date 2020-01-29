@@ -1,20 +1,11 @@
 package com.inducesmile.oblig1;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-
 import java.util.ArrayList;
-
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
-
 
 public class MainActivity extends AppCompatActivity {
    public static  ArrayList<ImageObjects> quizData = new ArrayList<>() ;
@@ -22,18 +13,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i("Paa?", " "+isLoaded);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Ønsker ikke at bildene skal bli lagt til flere ganger
         if (isLoaded == false) {
             addStandardPicture();
         }
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.menu_toolbar);
-        //setSupportActionBar(myToolbar);
-
-
-
-
     }
 
     public void addStandardPicture(){
@@ -71,6 +56,4 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
-
 }

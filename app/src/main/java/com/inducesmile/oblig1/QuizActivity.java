@@ -21,24 +21,21 @@ import java.util.List;
 import java.util.Random;
 
 public class QuizActivity extends AppCompatActivity {
-    /* TODO: Arrayen oppdaterer seg på ett vis... Om jeg går til quiz, så slettes indexer.. Trykker jeg så på database så er de borte der også. */
-int poeng = 0;
-    int antallQuizSpm = 0;
-    TextView galtSvar;
-    Button svarButtonOn;
-    EditText svarEditText;
-    ImageView correctAnswerIcon;
-    ImageView wrongAnswerIcon;
+    private int poeng = 0;
+   private int antallQuizSpm = 0;
+   private TextView galtSvar;
+   private Button svarButtonOn;
+   private EditText svarEditText;
+   private ImageView correctAnswerIcon;
+   private ImageView wrongAnswerIcon;
 
 ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
 
-    //Laget en kopi. Kopien vil etterhvert tømmes. Fikk problemer med at andre aktiviteter sin liste også ble tømt da. Derfor en kopi
+    //Kopi av "databasen. Denne vil bli tømt etterhvert som man går videre i quizen
     List<ImageObjects> quizDatabase = new ArrayList<>(quizDatabases);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-       //quizDatabasea = ObjectsArray.arrayList;
-       //quizDatabase = MainActivity.quizData;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
         galtSvar = (TextView) findViewById(R.id.galtSvar_textView);
@@ -53,8 +50,8 @@ ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
     @Override
     public boolean onOptionsItemSelected(MenuItem item ) {
         switch (item.getItemId()) {
-            case R.id.quiz:
-                Intent intentQuiz = new Intent(QuizActivity.this, QuizActivity.class);
+            case R.id.home:
+                Intent intentQuiz = new Intent(QuizActivity.this, MainActivity.class);
                 startActivity(intentQuiz);
                 return true;
 
@@ -87,15 +84,17 @@ ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
     int globalIndex = 0;
 
 
-    public void quizpic (View view){
+    public void quizpic (View view) {
+        if (!(quizDatabase.size() == 0)) {
+
         correctAnswerIcon.setVisibility(View.INVISIBLE);
         wrongAnswerIcon.setVisibility(View.INVISIBLE);
         svarEditText.setEnabled(true);
-       antallQuizSpm = quizDatabase.size();
+        antallQuizSpm = quizDatabase.size();
         antKlikk++;
         galtSvar.setText("");
-      //  Log.i("Ant bilder ", ""+antallQuizSpm);
-        Log.i("Ant klikk ", ""+antKlikk);
+        //  Log.i("Ant bilder ", ""+antallQuizSpm);
+        Log.i("Ant klikk ", "" + antKlikk);
         Button quizButton = (Button) findViewById(R.id.quiz_button);
         quizButton.setEnabled(false);
 
@@ -106,22 +105,24 @@ ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
 
 
         }
-        if (antKlikk == antallQuizSpm){
-          //  Toast.makeText(this, "Du har nå fullført quizen", Toast.LENGTH_LONG).show();
-           // Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+        if (antKlikk == antallQuizSpm) {
+            //  Toast.makeText(this, "Du har nå fullført quizen", Toast.LENGTH_LONG).show();
+            // Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
 
         }
 
 
-       loadbilde();
+        loadbilde();
 
-       svarButtonOn.setEnabled(true);
+        svarButtonOn.setEnabled(true);
 
-       EditText EmptyEditText = (EditText) findViewById(R.id.svar_editText);
-       EmptyEditText.setText("");
-        Log.i("quizIndex ", ""+globalIndex);
+        EditText EmptyEditText = (EditText) findViewById(R.id.svar_editText);
+        EmptyEditText.setText("");
+        Log.i("quizIndex ", "" + globalIndex);
         svarEditText.setHint("Hvem er på bildet?");
-
+    }else{
+            Toast.makeText(this, "Det er ingen bilder i databasen. Velg \"Database\" for å legge til bilder ", Toast.LENGTH_LONG).show();
+        }
 
     }
 
