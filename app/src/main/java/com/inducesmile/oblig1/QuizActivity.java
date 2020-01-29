@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -28,6 +27,9 @@ public class QuizActivity extends AppCompatActivity {
    private EditText svarEditText;
    private ImageView correctAnswerIcon;
    private ImageView wrongAnswerIcon;
+   private ImageView imgView;
+   private int antKlikk = 0;
+   private int globalIndex = 0;
 
 ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
 
@@ -43,7 +45,7 @@ ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
         svarEditText = (EditText) findViewById(R.id.svar_editText);
         correctAnswerIcon = (ImageView) findViewById(R.id.correctAnswer_imageView);
         wrongAnswerIcon = (ImageView) findViewById(R.id.wrongAnswer_imageView);
-
+        imgView = (ImageView) findViewById(R.id.imageView_quiz);
 
     }
 
@@ -72,19 +74,12 @@ ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
 
         }
     }
-    //DatabaseActivity databaseActivity = new DatabaseActivity();
-    //List<Integer> kopi = new ArrayList<>(Arrays.asList(databaseActivity.IMAGES));
-    //List<String> kopiNames = new ArrayList<>(Arrays.asList(databaseActivity.NAMES));
-
-    //DatabaseActivity databaseNames = new DatabaseActivity();
 
 
-
-    int antKlikk = 0;
-    int globalIndex = 0;
 
 
     public void quizpic (View view) {
+        //Må finnes minst ett objekt før man kan quizze
         if (!(quizDatabase.size() == 0)) {
 
         correctAnswerIcon.setVisibility(View.INVISIBLE);
@@ -93,27 +88,17 @@ ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
         antallQuizSpm = quizDatabase.size();
         antKlikk++;
         galtSvar.setText("");
-        //  Log.i("Ant bilder ", ""+antallQuizSpm);
-        Log.i("Ant klikk ", "" + antKlikk);
         Button quizButton = (Button) findViewById(R.id.quiz_button);
         quizButton.setEnabled(false);
 
+        //Startknapp endrer navn fra Start quiz til Neste
         if (!quizButton.getText().equals("Neste")) {
             quizButton.setText("Neste");
             svarButtonOn.setVisibility(View.VISIBLE);
             svarEditText.setVisibility(View.VISIBLE);
-
-
         }
-        if (antKlikk == antallQuizSpm) {
-            //  Toast.makeText(this, "Du har nå fullført quizen", Toast.LENGTH_LONG).show();
-            // Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
-
-        }
-
 
         loadbilde();
-
         svarButtonOn.setEnabled(true);
 
         EditText EmptyEditText = (EditText) findViewById(R.id.svar_editText);
@@ -127,24 +112,21 @@ ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
     }
 
     public void loadbilde(){
-        ImageView imgView = (ImageView) findViewById(R.id.imageView_quiz);
         int index = new Random().nextInt(quizDatabase.size());
         globalIndex = index;
+        imgView.setAlpha(0f);
         imgView.setImageBitmap(quizDatabase.get(index).getImage());
+        imgView.animate().alpha(1).setDuration(2500);
 
-
-
-        //quizDatabase.remove(index);
-        //kopiNames.remove(index);
 
 
     }
     public void svar (View view){
+
         hideKeyboard(this);
         Button svarButtonOff = (Button) findViewById(R.id.svar_button);
         svarButtonOff.setEnabled(false);
-        Log.i("Antall klikker: ",""+antKlikk);
-        Log.i("Antall QuizSpmer: ",""+antallQuizSpm);
+
         Button turnOnQuizButton = (Button) findViewById(R.id.quiz_button);
         if (antallQuizSpm > 1) {
             turnOnQuizButton.setEnabled(true);
@@ -153,18 +135,13 @@ ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
             //quizDatabase = MainActivity.quizData; //Virker ikke
         }
 
-        Log.i("svarIndex ", ""+globalIndex);
-
         String dbName = quizDatabase.get(globalIndex).getName();
-
-        Log.i("dataBaseName ",""+dbName);
-        Log.i("input", ""+ svarEditText.getText().toString());
 
 
         if (dbName.toUpperCase().equals(svarEditText.getText().toString().toUpperCase())){
             poeng++;
             correctAnswerIcon.setVisibility(View.VISIBLE);
-            Log.i("Funket", "ja");
+
         }else {
             wrongAnswerIcon.setVisibility(View.VISIBLE);
             galtSvar.setText("Feil svar! Riktig svar er "+dbName);

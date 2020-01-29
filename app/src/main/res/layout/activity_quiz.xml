@@ -24,6 +24,7 @@
         android:layout_width="190dp"
         android:layout_height="176dp"
         android:layout_marginTop="8dp"
+        android:alpha="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/score_textView" />

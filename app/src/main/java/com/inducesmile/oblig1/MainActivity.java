@@ -22,15 +22,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addStandardPicture(){
-        quizData.add(new ImageObjects(BitmapFactory.decodeResource(this.getResources(), R.drawable.bart), "Bart"));
         quizData.add(new ImageObjects(BitmapFactory.decodeResource(this.getResources(), R.drawable.cartman), "Cartman"));
-        quizData.add(new ImageObjects(BitmapFactory.decodeResource(this.getResources(), R.drawable.homer), "Homer"));
         quizData.add(new ImageObjects(BitmapFactory.decodeResource(this.getResources(), R.drawable.kenny), "Kenny"));
-        quizData.add(new ImageObjects(BitmapFactory.decodeResource(this.getResources(), R.drawable.marge), "Marge"));
-        quizData.add(new ImageObjects(BitmapFactory.decodeResource(this.getResources(), R.drawable.kyle), "Kyle"));
         isLoaded = true;
     }
 
+    //Gå til annen aktivitet
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

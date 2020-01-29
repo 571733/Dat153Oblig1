@@ -122,7 +122,7 @@ public class AddActivity extends AppCompatActivity {
             }
 
         }else {
-            Toast.makeText(this, "Her manglet det noe. Bildet ble ikke lagret", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Du må først velge ett bilde", Toast.LENGTH_SHORT).show();
         }
     }
 

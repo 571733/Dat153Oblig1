@@ -72,6 +72,7 @@ public class DatabaseActivity extends AppCompatActivity {
         }
     }
 
+    //Gå til annen aktivitet
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
