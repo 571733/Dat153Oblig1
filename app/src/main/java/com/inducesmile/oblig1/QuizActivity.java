@@ -30,6 +30,7 @@ public class QuizActivity extends AppCompatActivity {
    private ImageView imgView;
    private int antKlikk = 0;
    private int globalIndex = 0;
+   TextView quizDone;
 
 ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
 
@@ -46,6 +47,7 @@ ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
         correctAnswerIcon = (ImageView) findViewById(R.id.correctAnswer_imageView);
         wrongAnswerIcon = (ImageView) findViewById(R.id.wrongAnswer_imageView);
         imgView = (ImageView) findViewById(R.id.imageView_quiz);
+        quizDone = (TextView) findViewById(R.id.quizDone_textView);
 
     }
 
@@ -136,7 +138,8 @@ ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
         if (antallQuizSpm > 1) {
             turnOnQuizButton.setEnabled(true);
         }else{
-            Toast.makeText(this, "Du har nå fullført quizen", Toast.LENGTH_LONG).show();
+            quizDone.setText("Quizzen er ferdig. Du kan trykke på \"Quiz\" i menyen for å spille igjen");
+            //Toast.makeText(this, "Du har nå fullført quizen", Toast.LENGTH_LONG).show();
             //quizDatabase = MainActivity.quizData; //Virker ikke
         }
 

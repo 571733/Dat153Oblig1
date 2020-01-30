@@ -21,8 +21,8 @@
 
     <ImageView
         android:id="@+id/imageView_quiz"
-        android:layout_width="190dp"
-        android:layout_height="176dp"
+        android:layout_width="169dp"
+        android:layout_height="134dp"
         android:layout_marginTop="8dp"
         android:alpha="0"
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,7 +99,7 @@
         android:layout_width="46dp"
         android:layout_height="42dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="306dp"
+        android:layout_marginTop="264dp"
         android:layout_marginEnd="35dp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -109,16 +109,28 @@
 
     <ImageView
         android:id="@+id/wrongAnswer_imageView"
-        app:srcCompat="@drawable/ic_wrong"
         android:layout_width="46dp"
         android:layout_height="42dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="306dp"
+        android:layout_marginTop="264dp"
         android:layout_marginEnd="35dp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/svar_editText"
         app:layout_constraintTop_toBottomOf="@+id/menu_toolbar"
-         />
+        app:srcCompat="@drawable/ic_wrong" />
+
+    <TextView
+        android:id="@+id/quizDone_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/svar_editText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
