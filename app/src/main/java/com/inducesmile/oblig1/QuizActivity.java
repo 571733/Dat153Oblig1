@@ -139,6 +139,9 @@ ArrayList<ImageObjects> quizDatabases = MainActivity.quizData;
             turnOnQuizButton.setEnabled(true);
         }else{
             quizDone.setText("Quizzen er ferdig. Du kan trykke på \"Quiz\" i menyen for å spille igjen");
+            svarButtonOff.setVisibility(View.INVISIBLE);
+            turnOnQuizButton.setVisibility(View.INVISIBLE);
+
             //Toast.makeText(this, "Du har nå fullført quizen", Toast.LENGTH_LONG).show();
             //quizDatabase = MainActivity.quizData; //Virker ikke
         }
